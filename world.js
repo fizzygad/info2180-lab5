@@ -1,12 +1,24 @@
 document.addEventListener("DOMContentLoaded",()=>{
 
-    const lookup_button = document.getElementById("lookup")
+    const countrylookup_button = document.getElementById("countrylookup")
+    const citylookup_button = document.getElementById("citylookup")
     const country = document.getElementById("country")
     const results = document.getElementById("result")
 
-    lookup_button.addEventListener("click", async()=>{
+    countrylookup_button.addEventListener("click", async(event)=>{
+        event.preventDefault()
+        results.replaceChildren()
         const input = country.value
         const response = await fetch(`http://localhost/info2180-lab5/world.php?country=${input}`)
+        const feedback = await response.text()
+        results.innerHTML = feedback
+    })
+
+    citylookup_button.addEventListener("click", async(event)=>{
+        event.preventDefault()
+        results.replaceChildren()
+        const input = country.value
+        const response = await fetch(`http://localhost/info2180-lab5/world.php?country=${input}&cities=${true}`)
         const feedback = await response.text()
         results.innerHTML = feedback
     })
